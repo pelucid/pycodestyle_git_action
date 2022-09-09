@@ -15,4 +15,4 @@ LABEL com.github.actions.color="purple"
 RUN apk add jq curl
 
 RUN pip install pycodestyle
-CMD ["pycodestyle", "/github/workspace/"]
+CMD ["pycodestyle --max-line-length=100", "/github/workspace/"]
