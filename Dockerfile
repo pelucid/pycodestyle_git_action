@@ -1,11 +1,21 @@
-FROM jfloff/alpine-python
 
-LABEL "com.github.actions.name"="Python Style Checker"
-LABEL "com.github.actions.description"="Run PyCodeStyle on your Python."
-LABEL "com.github.actions.icon"="upload-cloud"
-LABEL "com.github.actions.color"="6f42c1"
 
-RUN pip install --upgrade pip
+FROM python:3.7-alpine
+
+
+LABEL name="pycodestyle-action"
+LABEL version="1.0.0"
+LABEL repository="http://github.com/ankitvgupta/pycodestyle-action"
+LABEL homepage="http://github.com/ankitvgupta/pycodestyle-action"
+
+LABEL maintainer="Ankit Gupta <ankit45@gmail.com>"
+LABEL com.github.actions.name="pycodestyle-action"
+LABEL com.github.actions.description="Run Pycodestyle on pull request"
+LABEL com.github.actions.icon="git-pull-request"
+LABEL com.github.actions.color="purple"
+
+RUN apk add jq curl
+
 RUN pip install pycodestyle
-
-CMD ["pycodestyle", "/github/workspace/"]
+COPY "entrypoint.sh" "/entrypoint.sh" 
+ENTRYPOINT ["/entrypoint.sh"]
